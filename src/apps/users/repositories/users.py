@@ -1,7 +1,7 @@
 from typing import Protocol, Type
 
-from ..enums import UsersProviderEnum
-from ..schemas.users import UserSchema
+from src.apps.users.enums import UsersProviderEnum
+from src.apps.users.schemas.users import UserSchema
 
 
 class UsersRepositoryProtocol(Protocol):
@@ -18,10 +18,10 @@ class UsersRepositoryImpl:
     async def get_users(self) -> list[UserSchema]:
         return [
             UserSchema(
-                email='luferovvs@yandex.ru',
-                username='luferovvs',
-                last_name='Луферов',
-                first_name='Виктор',
+                email='rshmelev@mail.ru',
+                username='rshmelev',
+                last_name='shmelev',
+                first_name='roman',
             )
         ]
 
@@ -30,10 +30,10 @@ class UsersRepositoryRedisImpl:
     async def get_users(self) -> list[UserSchema]:
         return [
             UserSchema(
-                email='luferovis@yandex.ru',
-                username='luferovis',
-                last_name='Луферов',
-                first_name='Иван',
+                email='yrii@mail.ru',
+                username='yriigg',
+                last_name='gg',
+                first_name='yrii',
             )
         ]
 
@@ -44,7 +44,7 @@ class UsersRepositoryFactoryImpl:
 
     async def make(self) -> UsersRepositoryProtocol:
         providers_mapper: dict[UsersProviderEnum, Type[UsersRepositoryImpl | UsersRepositoryRedisImpl]] = {
-            UsersProviderEnum.postgres: UsersRepositoryImpl,
+            UsersProviderEnum.postges: UsersRepositoryImpl,
             UsersProviderEnum.redis: UsersRepositoryRedisImpl,
         }
         return providers_mapper.get(self.provider, UsersRepositoryImpl)()

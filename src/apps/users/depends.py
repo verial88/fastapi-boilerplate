@@ -2,29 +2,31 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from src.apps.users.enums import UsersProviderEnum
 from src.apps.users.repositories.users import UsersRepositoryFactoryImpl, UsersRepositoryFactoryProtocol
 
-from .enums import UsersProviderEnum
 from .services import UsersServiceImpl, UsersServiceProtocol
 from .use_cases import UsersUseCaseImpl, UsersUseCaseProtocol
 
 # --- repositories ---
 
 
-def get_users_factory_repository(provider: UsersProviderEnum) -> UsersRepositoryFactoryProtocol:
+def get_users_repository_factory(provider: UsersProviderEnum) -> UsersRepositoryFactoryProtocol:
     return UsersRepositoryFactoryImpl(provider)
 
 
-UsersFactoryRepository = Annotated[UsersRepositoryFactoryProtocol, Depends(get_users_factory_repository)]
-
-# -- services ---
+UsersRepositoryFactory = Annotated[UsersRepositoryFactoryProtocol, Depends(get_users_repository_factory)]
 
 
-def get_users_service(users_factory_repository: UsersFactoryRepository) -> UsersServiceProtocol:
-    return UsersServiceImpl(users_factory_repository)
+# --- services ---
+
+
+def get_users_service(users_repository_factory: UsersRepositoryFactory) -> UsersServiceProtocol:
+    return UsersServiceImpl(users_repository_factory)
 
 
 UsersService = Annotated[UsersServiceProtocol, Depends(get_users_service)]
+
 
 # --- use_cases ---
 
