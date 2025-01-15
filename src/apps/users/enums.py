@@ -2,5 +2,5 @@ from enum import StrEnum, auto
 
 
 class UsersProviderEnum(StrEnum):
-    postges = auto()
+    postgres = auto()
     redis = auto()

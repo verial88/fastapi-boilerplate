@@ -44,7 +44,7 @@ class UsersRepositoryFactoryImpl:
 
     async def make(self) -> UsersRepositoryProtocol:
         providers_mapper: dict[UsersProviderEnum, Type[UsersRepositoryImpl | UsersRepositoryRedisImpl]] = {
-            UsersProviderEnum.postges: UsersRepositoryImpl,
+            UsersProviderEnum.postgres: UsersRepositoryImpl,
             UsersProviderEnum.redis: UsersRepositoryRedisImpl,
         }
         return providers_mapper.get(self.provider, UsersRepositoryImpl)()
