@@ -1,5 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
+from src.core.schemas import OutputApiSchema
+
 
 class UserSchema(BaseModel):
     email: EmailStr
@@ -10,7 +12,7 @@ class UserSchema(BaseModel):
     is_superuser: bool = False
 
 
-class UserResponseSchema(BaseModel):
+class UserResponseSchema(OutputApiSchema):
     email: EmailStr
     username: str
     last_name: str
