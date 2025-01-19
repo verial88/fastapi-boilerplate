@@ -8,7 +8,8 @@ from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql import func
 from sqlalchemy_utils import UUIDType
-from users.settings import settings
+
+from src.settings import settings
 
 __all__ = (
     'Base',

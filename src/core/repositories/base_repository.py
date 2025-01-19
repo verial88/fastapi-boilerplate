@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import func
 
 from src.core.db import Base
-from src.core.utils.exceptions import ModelNotFoundException, SortingFieldNotFoundError
+from src.core.exceptions import ModelNotFoundException, SortingFieldNotFoundError
 
 from ..schemas import CreateBaseModel, PaginationResultSchema, PaginationSchema, UpdateBaseModel
 

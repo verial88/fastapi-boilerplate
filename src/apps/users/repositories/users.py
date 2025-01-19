@@ -1,6 +1,7 @@
 from typing import Protocol, Type
 
 from src.apps.users.enums import UsersProviderEnum
+from src.apps.users.exceptions import PermissionForUserDeniedError
 from src.apps.users.schemas.users import UserSchema
 
 
@@ -28,6 +29,7 @@ class UsersRepositoryImpl:
 
 class UsersRepositoryRedisImpl:
     async def get_users(self) -> list[UserSchema]:
+        raise PermissionForUserDeniedError()
         return [
             UserSchema(
                 email='yrii@mail.ru',
